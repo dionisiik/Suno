@@ -1,10 +1,32 @@
 import SwiftUI
+import Foundation
 
 struct TipCard: View {
     let iconImageName: String
     let title: String
     let description: String
     let color: Color
+    
+    // Computed property для текста с justify alignment и line height
+    private var attributedDescription: AttributedString {
+        var attributedString = AttributedString(description)
+        
+        // Создаем paragraph style для justify alignment и line height
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .justified  // Выравнивание по ширине
+        paragraphStyle.lineHeightMultiple = 1.4  // Line height (1.2 = 120% от размера шрифта)
+        paragraphStyle.lineSpacing = 2  // Дополнительный межстрочный интервал
+        
+        // Применяем стили к тексту
+        attributedString.font = .system(size: 12)
+        attributedString.foregroundColor = .gray
+        
+       
+        let range = attributedString.startIndex..<attributedString.endIndex
+     
+        
+        return attributedString
+    }
     
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -23,9 +45,7 @@ struct TipCard: View {
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.black)
                 
-                Text(description)
-                    .font(.system(size: 12))
-                    .foregroundColor(.gray)
+                Text(attributedDescription)
                     .fixedSize(horizontal: false, vertical: true)
                     .lineLimit(3)
             }
