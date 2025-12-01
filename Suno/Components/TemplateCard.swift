@@ -51,4 +51,16 @@ struct TemplateCard: View {
     }
 }
 
+#Preview {
+    TemplateCard(
+        icon: "cloud.fill",
+        title: "Dream Pop",
+        subtitle: "Ethereal & atmospheric",
+        color: .blue
+    )
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
+
 

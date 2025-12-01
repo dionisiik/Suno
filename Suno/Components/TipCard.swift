@@ -33,4 +33,16 @@ struct TipCard: View {
     }
 }
 
+#Preview {
+    TipCard(
+        icon: "lightbulb.fill",
+        title: "Be Specific",
+        description: "Include instruments, tempo, and mood for better results.",
+        color: .blue
+    )
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
+
 

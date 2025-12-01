@@ -22,4 +22,11 @@ struct ProTag: View {
     }
 }
 
+#Preview {
+    ProTag(icon: "bolt.fill", text: "Instant", color: .orange)
+        .padding()
+        .background(Color.gray.opacity(0.1))
+}
+
+
 

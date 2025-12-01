@@ -47,4 +47,16 @@ struct QuickActionCard: View {
     }
 }
 
+#Preview {
+    QuickActionCard(
+        icon: "mic.fill",
+        title: "Voice Input",
+        subtitle: "Speak your idea",
+        gradient: [Color.blue, Color.green]
+    )
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
+
 

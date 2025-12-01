@@ -28,4 +28,24 @@ struct HomeProFeatureRow: View {
     }
 }
 
+#Preview {
+    VStack(spacing: 12) {
+        HomeProFeatureRow(
+            icon: "arrow.down.circle.fill",
+            text: "Export in Multiple Formats",
+            detail: "MP3, WAV, FLAC & more",
+            color: .blue
+        )
+        HomeProFeatureRow(
+            icon: "headphones",
+            text: "HQ Audio",
+            detail: "Studio quality sound",
+            color: .pink
+        )
+    }
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
+
 

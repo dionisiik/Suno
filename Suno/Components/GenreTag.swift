@@ -26,4 +26,14 @@ struct GenreTag: View {
     }
 }
 
+#Preview {
+    HStack {
+        GenreTag(icon: "bolt.fill", text: "Energetic Pop", color: .orange)
+        GenreTag(icon: "moon.fill", text: "Chill Lofi", color: .blue)
+    }
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
+
 

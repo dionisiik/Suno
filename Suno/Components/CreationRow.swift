@@ -95,4 +95,24 @@ struct CreationRow: View {
     }
 }
 
+#Preview {
+    let sampleTrack = Track(
+        title: "Chill Lofi Beats",
+        prompt: "A peaceful lofi beat",
+        duration: 90,
+        genre: "Lofi",
+        mood: "Calm",
+        quality: .hq,
+        isFavorite: true,
+        isDownloaded: false,
+        icon: "headphones",
+        gradientColors: ["0.6,0.2,1.0", "1.0,0.4,0.6"]
+    )
+    
+    return CreationRow(track: sampleTrack, onTap: {})
+        .padding()
+        .background(Color.gray.opacity(0.1))
+}
+
+
 
