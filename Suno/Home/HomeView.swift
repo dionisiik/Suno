@@ -568,35 +568,35 @@ struct HomeView: View {
     }
     
     private var proTipsSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
             Text("Pro Tips for Better Results")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.black)
             
             VStack(spacing: 12) {
                 TipCard(
-                    icon: "lightbulb.fill",
+                    iconImageName: "bulbWhite",
                     title: "Be Specific",
                     description: "Include instruments, tempo, and mood for better results. Example: Upbeat acoustic guitar with soft drums, 126 BPM.",
                     color: Color(red: 0.2, green: 0.6, blue: 1.0)
                 )
                 
                 TipCard(
-                    icon: "sparkles",
+                    iconImageName: "palleteWhite",
                     title: "Experiment with Genres",
                     description: "Try blending different genres to discover unique sounds. Mix classical with electronic or jazz with hip-hop!",
                     color: Color(red: 0.6, green: 0.2, blue: 1.0)
                 )
                 
                 TipCard(
-                    icon: "percent",
+                    iconImageName: "magicStickWithStarsWhite",
                     title: "Use Advanced Controls",
                     description: "Take advantage of HQ audio settings and custom duration options for professional-quality output.",
                     color: .green
                 )
                 
                 TipCard(
-                    icon: "square.and.arrow.up.fill",
+                    iconImageName: "shareWhite",
                     title: "Share & Collaborate",
                     description: "Share your creations with the community for feedback and collaborate with other Pro members.",
                     color: Color(red: 1.0, green: 0.5, blue: 0.0)

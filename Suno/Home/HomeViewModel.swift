@@ -1,4 +1,12 @@
+//
+//  HomeViewModel.swift
+//  Suno
+//
+//  Created by Edward on 28.11.2025.
+//
+
 import Foundation
+import SwiftUI
 
 final class HomeViewModel: ObservableObject {
     // MARK: - Input
@@ -40,5 +48,4 @@ final class HomeViewModel: ObservableObject {
         showGenerationView = true
     }
 }
-
 
