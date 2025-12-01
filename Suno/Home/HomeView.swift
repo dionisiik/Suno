@@ -535,28 +535,28 @@ struct HomeView: View {
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 TemplateCard(
-                    icon: "cloud.fill",
+                    TemplateIconImageName: "cloudWhite",
                     title: "Dream Pop",
                     subtitle: "Ethereal & atmospheric",
                     color: Color(red: 0.4, green: 0.8, blue: 1.0)
                 )
                 
                 TemplateCard(
-                    icon: "heart.fill",
+                    TemplateIconImageName: "likeWhite",
                     title: "Romantic",
                     subtitle: "Soft & emotional",
                     color: Color(red: 1.0, green: 0.4, blue: 0.6)
                 )
                 
                 TemplateCard(
-                    icon: "sun.max.fill",
+                    TemplateIconImageName: "sunWhite",
                     title: "Summer Vibes",
                     subtitle: "Upbeat & tropical",
                     color: Color(red: 1.0, green: 0.5, blue: 0.0)
                 )
                 
                 TemplateCard(
-                    icon: "leaf.fill",
+                    TemplateIconImageName: "LeafWhite",
                     title: "Nature Sounds",
                     subtitle: "Peaceful & organic",
                     color: .green
@@ -575,28 +575,28 @@ struct HomeView: View {
             
             VStack(spacing: 12) {
                 TipCard(
-                    iconImageName: "bulbWhite",
+                    TipIconImageName: "bulbWhite",
                     title: "Be Specific",
                     description: "Include instruments, tempo, and mood for better results. Example: Upbeat acoustic guitar with soft drums, 126 BPM.",
                     color: Color(red: 0.2, green: 0.6, blue: 1.0)
                 )
                 
                 TipCard(
-                    iconImageName: "palleteWhite",
+                    TipIconImageName: "palleteWhite",
                     title: "Experiment with Genres",
                     description: "Try blending different genres to discover unique sounds. Mix classical with electronic or jazz with hip-hop!",
                     color: Color(red: 0.6, green: 0.2, blue: 1.0)
                 )
                 
                 TipCard(
-                    iconImageName: "magicStickWithStarsWhite",
+                    TipIconImageName: "magicStickWithStarsWhite",
                     title: "Use Advanced Controls",
                     description: "Take advantage of HQ audio settings and custom duration options for professional-quality output.",
                     color: .green
                 )
                 
                 TipCard(
-                    iconImageName: "shareWhite",
+                    TipIconImageName: "shareWhite",
                     title: "Share & Collaborate",
                     description: "Share your creations with the community for feedback and collaborate with other Pro members.",
                     color: Color(red: 1.0, green: 0.5, blue: 0.0)

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TemplateCard: View {
-    let icon: String
+    let TemplateIconImageName: String
     let title: String
     let subtitle: String
     let color: Color
@@ -10,23 +10,25 @@ struct TemplateCard: View {
         Button(action: {}) {
             VStack(spacing: 12) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(color.opacity(0.2))
-                        .frame(height: 80)
-                    
-                    Image(systemName: icon)
-                        .font(.system(size: 32))
-                        .foregroundColor(color)
+                    Rectangle()
+                        .fill(color)
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(12)
+                    Image(TemplateIconImageName)
+                        .foregroundColor(.white)
+                        .font(.system(size: 12))
                 }
                 
-                VStack(spacing: 4) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(title)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.black)
+                        .multilineTextAlignment(.trailing) 
                     
                     Text(subtitle)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
+                        .multilineTextAlignment(.trailing)
                 }
                 
                 Button(action: {}) {
@@ -39,9 +41,9 @@ struct TemplateCard: View {
                         .cornerRadius(8)
                 }
             }
-            .frame(maxWidth: .infinity)
             .padding()
-            .background(Color.white)
+            .frame(width: 158, height: 164)
+            .background(color.opacity(0.1))
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
@@ -53,7 +55,7 @@ struct TemplateCard: View {
 
 #Preview {
     TemplateCard(
-        icon: "cloud.fill",
+        TemplateIconImageName: "cloudWhite",
         title: "Dream Pop",
         subtitle: "Ethereal & atmospheric",
         color: .blue

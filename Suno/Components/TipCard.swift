@@ -2,7 +2,7 @@ import SwiftUI
 import Foundation
 
 struct TipCard: View {
-    let iconImageName: String
+    let TipIconImageName: String
     let title: String
     let description: String
     let color: Color
@@ -35,7 +35,7 @@ struct TipCard: View {
                     .fill(color)
                     .frame(width: 40, height: 40)
                     .cornerRadius(12)
-                Image(iconImageName)
+                Image(TipIconImageName)
                     .foregroundColor(.white)
                     .font(.system(size: 12))
             }
@@ -66,7 +66,7 @@ struct TipCard: View {
 
 #Preview {
     TipCard(
-        iconImageName: "bulbWhite",
+        TipIconImageName: "bulbWhite",
         title: "Be Specific",
         description: "Include instruments, tempo, and mood for better results. Example: Upbeat acoustic guitar with soft drums, 120 BPM",
         color: .blue
