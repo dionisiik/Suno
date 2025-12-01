@@ -9,13 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var appState: AppState
-    @State private var prompt = ""
-    @State private var selectedDuration = "30 sec"
-    @State private var selectedQuality = "HQ"
-    @State private var selectedMood: String? = nil
-    @State private var selectedInstrument: String? = nil
-    @State private var advancedOptionsExpanded = false
-    @State private var showGenerationView = false
+    @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
         ScrollView {
@@ -162,7 +156,7 @@ struct HomeView: View {
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.black)
                         
-                        TextEditor(text: $prompt)
+                        TextEditor(text: $viewModel.prompt)
                             .frame(height: 120)
                             .padding(12)
                             .background(Color.white)
@@ -173,7 +167,7 @@ struct HomeView: View {
                             )
                             .overlay(
                                 Group {
-                                    if prompt.isEmpty {
+                                    if viewModel.prompt.isEmpty {
                                         VStack {
                                             HStack {
                                                 Text("E.g., A peaceful piano melody with soft rain sounds, perfect for studying...")
@@ -204,7 +198,7 @@ struct HomeView: View {
                     
                     // Advanced Options
                     VStack(alignment: .leading, spacing: 16) {
-                        Button(action: { advancedOptionsExpanded.toggle() }) {
+                        Button(action: { viewModel.advancedOptionsExpanded.toggle() }) {
                             HStack {
                                 Text("Advanced Options")
                                     .font(.system(size: 18, weight: .bold))
@@ -212,12 +206,12 @@ struct HomeView: View {
                                 
                                 Spacer()
                                 
-                                Image(systemName: advancedOptionsExpanded ? "chevron.down" : "chevron.right")
+                                Image(systemName: viewModel.advancedOptionsExpanded ? "chevron.down" : "chevron.right")
                                     .foregroundColor(.gray)
                             }
                         }
                         
-                        if advancedOptionsExpanded {
+                        if viewModel.advancedOptionsExpanded {
                             // Genre Dropdown
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Genre")
@@ -251,17 +245,17 @@ struct HomeView: View {
                                 
                                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                                     ForEach(["Happy", "Calm", "Energetic", "Sad", "Epic", "Dark", "Chill", "Relaxed", "Upbeat"], id: \.self) { mood in
-                                        Button(action: { selectedMood = selectedMood == mood ? nil : mood }) {
+                                        Button(action: { viewModel.selectedMood = viewModel.selectedMood == mood ? nil : mood }) {
                                             Text(mood)
                                                 .font(.system(size: 13))
-                                                .foregroundColor(selectedMood == mood ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
+                                                .foregroundColor(viewModel.selectedMood == mood ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
                                                 .frame(maxWidth: .infinity)
                                                 .padding(.vertical, 10)
-                                                .background(selectedMood == mood ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
+                                                .background(viewModel.selectedMood == mood ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
                                                 .cornerRadius(10)
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(selectedMood == mood ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: selectedMood == mood ? 2 : 1)
+                                                        .stroke(viewModel.selectedMood == mood ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: viewModel.selectedMood == mood ? 2 : 1)
                                                 )
                                         }
                                     }
@@ -276,17 +270,17 @@ struct HomeView: View {
                                 
                                 HStack(spacing: 12) {
                                     ForEach(["30 sec", "1 min", "2 min", "3 min"], id: \.self) { duration in
-                                        Button(action: { selectedDuration = duration }) {
+                                        Button(action: { viewModel.selectedDuration = duration }) {
                                             Text(duration)
                                                 .font(.system(size: 13))
-                                                .foregroundColor(selectedDuration == duration ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
+                                                .foregroundColor(viewModel.selectedDuration == duration ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
                                                 .frame(maxWidth: .infinity)
                                                 .padding(.vertical, 10)
-                                                .background(selectedDuration == duration ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
+                                                .background(viewModel.selectedDuration == duration ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
                                                 .cornerRadius(10)
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(selectedDuration == duration ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: selectedDuration == duration ? 2 : 1)
+                                                        .stroke(viewModel.selectedDuration == duration ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: viewModel.selectedDuration == duration ? 2 : 1)
                                                 )
                                         }
                                     }
@@ -300,21 +294,21 @@ struct HomeView: View {
                                     .foregroundColor(.black)
                                 
                                 HStack(spacing: 12) {
-                                    Button(action: { selectedQuality = "Standard" }) {
+                                    Button(action: { viewModel.selectedQuality = "Standard" }) {
                                         Text("Standard")
                                             .font(.system(size: 13))
-                                            .foregroundColor(selectedQuality == "Standard" ? Color(red: 1.0, green: 0.4, blue: 0.6) : .gray)
+                                            .foregroundColor(viewModel.selectedQuality == "Standard" ? Color(red: 1.0, green: 0.4, blue: 0.6) : .gray)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 10)
-                                            .background(selectedQuality == "Standard" ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
+                                            .background(viewModel.selectedQuality == "Standard" ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
                                             .cornerRadius(10)
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(selectedQuality == "Standard" ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: selectedQuality == "Standard" ? 2 : 1)
+                                                    .stroke(viewModel.selectedQuality == "Standard" ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: viewModel.selectedQuality == "Standard" ? 2 : 1)
                                             )
                                     }
                                     
-                                    Button(action: { selectedQuality = "HQ" }) {
+                                    Button(action: { viewModel.selectedQuality = "HQ" }) {
                                         HStack {
                                             Image(systemName: "star.fill")
                                                 .font(.system(size: 10))
@@ -322,14 +316,14 @@ struct HomeView: View {
                                             Text("HQ")
                                                 .font(.system(size: 13))
                                         }
-                                        .foregroundColor(selectedQuality == "HQ" ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
+                                        .foregroundColor(viewModel.selectedQuality == "HQ" ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, 10)
-                                        .background(selectedQuality == "HQ" ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
+                                        .background(viewModel.selectedQuality == "HQ" ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
                                         .cornerRadius(10)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 10)
-                                                .stroke(selectedQuality == "HQ" ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: selectedQuality == "HQ" ? 2 : 1)
+                                                .stroke(viewModel.selectedQuality == "HQ" ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: viewModel.selectedQuality == "HQ" ? 2 : 1)
                                         )
                                     }
                                 }
@@ -343,17 +337,17 @@ struct HomeView: View {
                                 
                                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                                     ForEach(["🎹 Piano", "🎸 Guitar", "🥁 Drums", "🎻 Strings", "🎤 Vocals", "🎶 Synth"], id: \.self) { instrument in
-                                        Button(action: { selectedInstrument = selectedInstrument == instrument ? nil : instrument }) {
+                                        Button(action: { viewModel.selectedInstrument = viewModel.selectedInstrument == instrument ? nil : instrument }) {
                                             Text(instrument)
                                                 .font(.system(size: 13))
-                                                .foregroundColor(selectedInstrument == instrument ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
+                                                .foregroundColor(viewModel.selectedInstrument == instrument ? Color(red: 1.0, green: 0.4, blue: 0.6) : .black)
                                                 .frame(maxWidth: .infinity)
                                                 .padding(.vertical, 10)
-                                                .background(selectedInstrument == instrument ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
+                                                .background(viewModel.selectedInstrument == instrument ? Color(red: 1.0, green: 0.4, blue: 0.6).opacity(0.1) : Color.white)
                                                 .cornerRadius(10)
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(selectedInstrument == instrument ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: selectedInstrument == instrument ? 2 : 1)
+                                                        .stroke(viewModel.selectedInstrument == instrument ? Color(red: 1.0, green: 0.4, blue: 0.6) : Color(white: 0.8), lineWidth: viewModel.selectedInstrument == instrument ? 2 : 1)
                                                 )
                                         }
                                     }
@@ -367,7 +361,7 @@ struct HomeView: View {
                     // Generate Instantly Button
                     VStack(spacing: 8) {
                         Button(action: {
-                            startGeneration()
+                            viewModel.startGeneration(appState: appState)
                         }) {
                             HStack {
                                 Image(systemName: "bolt.fill")
@@ -387,8 +381,8 @@ struct HomeView: View {
                             )
                             .cornerRadius(12)
                         }
-                        .disabled(prompt.isEmpty)
-                        .opacity(prompt.isEmpty ? 0.6 : 1.0)
+                        .disabled(viewModel.prompt.isEmpty)
+                        .opacity(viewModel.prompt.isEmpty ? 0.6 : 1.0)
                         
                         Text("Priority processing • No queue • No watermarks")
                             .font(.system(size: 12))
@@ -396,7 +390,7 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 32)
-                    .sheet(isPresented: $showGenerationView) {
+                    .sheet(isPresented: $viewModel.showGenerationView) {
                         GenerationView()
                             .environmentObject(appState)
                     }
@@ -598,34 +592,8 @@ struct HomeView: View {
             }
             .background(Color.white)
         }
-        
-        private func startGeneration() {
-        guard !prompt.isEmpty else { return }
-        
-        let duration: TimeInterval
-        switch selectedDuration {
-        case "30 sec": duration = 30
-        case "1 min": duration = 60
-        case "2 min": duration = 120
-        case "3 min": duration = 180
-        default: duration = 30
-        }
-        
-        let quality: Track.AudioQuality = selectedQuality == "HQ" ? .hq : .standard
-        
-        let request = GenerationRequest(
-            prompt: prompt,
-            genre: "Auto-detect",
-            mood: selectedMood,
-            duration: duration,
-            quality: quality,
-            instruments: selectedInstrument != nil ? [selectedInstrument!] : []
-        )
-        
-        appState.startGeneration(request)
-        showGenerationView = true
     }
-}
+
 
 
 struct ProTag: View {
@@ -933,5 +901,6 @@ struct TipCard: View {
 
 #Preview {
     HomeView()
+        .environmentObject(AppState())
 }
 
