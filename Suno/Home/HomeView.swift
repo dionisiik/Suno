@@ -513,12 +513,20 @@ struct HomeView: View {
                     .padding(20)
                     .background(
                         LinearGradient(
-                            colors: [Color(red: 1.0, green: 0.9, blue: 0.95), Color(red: 0.95, green: 0.9, blue: 1.0)],
+                            colors: [
+                                Color(red: 0.953, green: 0.910, blue: 1.0),      // #F3E8FF
+                                Color(red: 0.988, green: 0.906, blue: 0.953),    // #FCE7F3
+                                Color(red: 1.0, green: 0.929, blue: 0.835)      // #FFEDD5
+                            ],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
                     .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color(red: 0.847, green: 0.706, blue: 0.996), lineWidth: 1)
+                    )
                     .padding(.horizontal, 20)
                     .padding(.bottom, 32)
     }
