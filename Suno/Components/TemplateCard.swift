@@ -43,8 +43,8 @@ struct TemplateCard: View {
                         .cornerRadius(8)
                 }
             }
-            .frame(width: 128, height: 178, alignment: .leading)
-            .padding(.horizontal, 16)
+            .frame(minWidth: 24, maxWidth: .infinity, minHeight: 154, alignment: .leading)
+            .padding(16)
             .background(color.opacity(0.1))
             .cornerRadius(16)
             .overlay(
