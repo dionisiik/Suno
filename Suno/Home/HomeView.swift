@@ -488,10 +488,15 @@ struct HomeView: View {
     private var proExclusiveFeaturesSection: some View {
                     VStack(alignment: .leading, spacing: 16) {
                         HStack(spacing: 12) {
-                            Image(systemName: "crown.fill")
-                                .foregroundColor(Color(red: 1.0, green: 0.5, blue: 0.0))
-                                .font(.system(size: 24))
-                            
+                            ZStack {
+                                Rectangle()
+                                    .fill(AppGradients.redOrange)
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(12)
+                                Image("proCrownWhite")
+                                    .foregroundColor(Color(red: 1.0, green: 0.5, blue: 0.0))
+                                    .font(.system(size: 24))
+                            }
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Pro Exclusive Features")
                                     .font(.system(size: 18, weight: .bold))
@@ -504,24 +509,15 @@ struct HomeView: View {
                         }
                         
                         VStack(spacing: 12) {
-                            HomeProFeatureRow(icon: "arrow.down.circle.fill", text: "Export in Multiple Formats", detail: "MP3, WAV, FLAC & more", color: Color(red: 0.2, green: 0.6, blue: 1.0))
-                            HomeProFeatureRow(icon: "slider.horizontal.3", text: "Advanced Audio Controls", detail: "Fine-tune every parameter", color: Color(red: 1.0, green: 0.4, blue: 0.6))
-                            HomeProFeatureRow(icon: "cloud.fill", text: "Unlimited Cloud Storage", detail: "Save all your creations", color: .green)
-                            HomeProFeatureRow(icon: "person.2.fill", text: "Collaboration Tools", detail: "Work with other creators", color: Color(red: 1.0, green: 0.5, blue: 0.0))
+                            HomeProFeatureRow(HomeProImageName: "exportWhite", text: "Export in Multiple Formats", detail: "MP3, WAV, FLAC & more", color: AnyShapeStyle(AppGradients.blue))
+                            HomeProFeatureRow(HomeProImageName: "controlsWhite", text: "Advanced Audio Controls", detail: "Fine-tune every parameter", color: AnyShapeStyle(AppGradients.pink))
+                            HomeProFeatureRow(HomeProImageName: "folderWhite", text: "Unlimited Cloud Storage", detail: "Save all your creations", color: AnyShapeStyle(AppGradients.green))
+                            HomeProFeatureRow(HomeProImageName: "groupedPeopleWhite", text: "Collaboration Tools", detail: "Work with other creators", color: AnyShapeStyle(AppGradients.redOrange))
                         }
                     }
+                    .frame(width: 327, height: 388)
                     .padding(20)
-                    .background(
-                        LinearGradient(
-                            colors: [
-                                Color(red: 0.953, green: 0.910, blue: 1.0),      // #F3E8FF
-                                Color(red: 0.988, green: 0.906, blue: 0.953),    // #FCE7F3
-                                Color(red: 1.0, green: 0.929, blue: 0.835)      // #FFEDD5
-                            ],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
+                    .background(AppGradients.proBackground)
                     .cornerRadius(20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
