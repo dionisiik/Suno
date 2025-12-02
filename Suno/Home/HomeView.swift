@@ -6,10 +6,28 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct HomeView: View {
     @EnvironmentObject var appState: AppState
     @StateObject private var viewModel = HomeViewModel()
+    
+    private var attributedDescription: AttributedString {
+        let text = "Transform your ideas into stunning music with AI. Unlimited generations at your fingertips!"
+        var attributedString = AttributedString(text)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 26.0 / 16.0  // line height 26 для font size 16
+        paragraphStyle.alignment = .center
+        
+        attributedString.font = .system(size: 16)
+        attributedString.foregroundColor = Color(red: 0.294, green: 0.333, blue: 0.388) // #4B5563
+        
+        let range = attributedString.startIndex..<attributedString.endIndex
+        attributedString[range].paragraphStyle = paragraphStyle
+        
+        return attributedString
+    }
     
     var body: some View {
         ScrollView {
@@ -33,12 +51,12 @@ struct HomeView: View {
     // MARK: - Sections
     
     private var headerSection: some View {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Good Morning")
-                                .font(.system(size: 12))
-                                .foregroundColor(.gray)
-                            
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Good Morning")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                        
+                        HStack(alignment: .center) {
                             HStack(spacing: 4) {
                                 Text("Hey, \(appState.user.name)!")
                                     .font(.system(size: 28, weight: .bold))
@@ -47,37 +65,45 @@ struct HomeView: View {
                                 Text("👋")
                                     .font(.system(size: 28))
                             }
-                        }
-                        
-                        Spacer()
-                        
-                        HStack(spacing: 12) {
-                            if appState.user.isPro {
-                                Button(action: {}) {
-                                    HStack(spacing: 6) {
-                                        Image(systemName: "crown.fill")
-                                            .font(.system(size: 12))
-                                        Text("PRO")
-                                            .font(.system(size: 14, weight: .bold))
-                                    }
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
-                                    .background(
-                                        LinearGradient(
-                                            colors: [Color(red: 1.0, green: 0.5, blue: 0.0), Color(red: 1.0, green: 0.4, blue: 0.6)],
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
-                                    )
-                                    .cornerRadius(20)
-                                }
-                            }
                             
-                            Button(action: {}) {
-                                Image(systemName: "gearshape")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.gray)
+                            Spacer()
+                            
+                            HStack(spacing: 12) {
+                                if appState.user.isPro {
+                                    Button(action: {}) {
+                                        HStack(spacing: 6) {
+                                            Image("proCrownWhite")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 12, height: 12)
+                                            Text("PRO")
+                                                .font(.system(size: 14, weight: .bold))
+                                                .foregroundStyle(.white)
+                                        }
+                                        .foregroundColor(.black)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                        .background(AppGradients.redOrange)
+                                        .cornerRadius(20)
+                                    }
+                                }
+                                
+                                Button(action: {}) {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color(red: 0.953, green: 0.957, blue: 0.965)) // #F3F4F6
+                                            .frame(width: 40, height: 40)
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color(red: 0.898, green: 0.906, blue: 0.922), lineWidth: 1) // #E5E7EB
+                                            )
+                                        
+                                        Image("gearGray")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 20, height: 20)
+                                    }
+                                }
                             }
                         }
                     }
@@ -90,27 +116,18 @@ struct HomeView: View {
                     VStack(spacing: 16) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(
-                                    LinearGradient(
-                                        colors: [Color(red: 1.0, green: 0.4, blue: 0.6), Color(red: 0.6, green: 0.2, blue: 1.0)],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
+                                .fill(AppGradients.orangePinkPurple)
                                 .frame(width: 100, height: 100)
                             
                             VStack(spacing: 4) {
-                                Image(systemName: "wand.and.stars")
-                                    .font(.system(size: 40))
+                                Image("magicStickWithStarsWhiteBig")
+                                    .resizable()
+                                    .interpolation(.high)
+                                    .antialiased(false)
+                                    .scaledToFit()
+                                    .frame(width: 39, height: 36)
                                     .foregroundColor(.white)
-                                
-                                HStack(spacing: 2) {
-                                    ForEach(0..<3) { _ in
-                                        Image(systemName: "star.fill")
-                                            .font(.system(size: 8))
-                                            .foregroundColor(.white)
-                                    }
-                                }
+            
                             }
                         }
                         
@@ -118,10 +135,9 @@ struct HomeView: View {
                             .font(.system(size: 28, weight: .bold))
                             .foregroundColor(.black)
                         
-                        Text("Transform your ideas into stunning music with AI. Unlimited generations at your fingertips!")
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
+                        Text(attributedDescription)
                             .multilineTextAlignment(.center)
+                            .lineLimit(3)
                             .padding(.horizontal, 20)
                     }
                     .padding(.bottom, 32)
