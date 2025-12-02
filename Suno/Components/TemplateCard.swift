@@ -8,7 +8,7 @@ struct TemplateCard: View {
     
     var body: some View {
         Button(action: {}) {
-            VStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 12) {
                 ZStack {
                     Rectangle()
                         .fill(color)
@@ -23,26 +23,28 @@ struct TemplateCard: View {
                     Text(title)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.black)
-                        .multilineTextAlignment(.trailing) 
+                        .multilineTextAlignment(.leading)
                     
                     Text(subtitle)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
-                        .multilineTextAlignment(.trailing)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 
                 Button(action: {}) {
                     Text("Try Template")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.white)
+                        .foregroundColor(color)
                         .padding(.horizontal, 16)
+                        .frame(width: 123, height: 22)
                         .padding(.vertical, 6)
-                        .background(color)
+                        .background(.white)
                         .cornerRadius(8)
                 }
             }
-            .padding()
-            .frame(width: 158, height: 164)
+            .frame(width: 128, height: 178, alignment: .leading)
+            .padding(.horizontal, 16)
             .background(color.opacity(0.1))
             .cornerRadius(16)
             .overlay(

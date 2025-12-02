@@ -414,7 +414,13 @@ struct HomeView: View {
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.black)
             
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+            LazyVGrid(
+                columns: [
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12)
+                ],
+                spacing: 12
+            ) {
                 QuickActionCard(
                     icon: "mic.fill",
                     title: "Voice Input",
@@ -518,7 +524,7 @@ struct HomeView: View {
     }
     
     private var trendingTemplatesSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("Trending Templates")
                     .font(.system(size: 20, weight: .bold))
@@ -533,7 +539,7 @@ struct HomeView: View {
                 }
             }
             
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
                 TemplateCard(
                     TemplateIconImageName: "cloudWhite",
                     title: "Dream Pop",
