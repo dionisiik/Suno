@@ -422,31 +422,31 @@ struct HomeView: View {
                 spacing: 12
             ) {
                             QuickActionCard(
-                                icon: "mic.fill",
+                                QuickActionIconImageName: "microphoneWhite",
                                 title: "Voice Input",
                                 subtitle: "Speak your idea",
-                                gradient: [Color(red: 0.4, green: 0.8, blue: 1.0), Color.green]
+                                gradient: AppGradients.blue
                             )
                             
                             QuickActionCard(
-                                icon: "wand.and.stars",
+                                QuickActionIconImageName: "magicStickNoStarsWhite",
                                 title: "Surprise Me",
                                 subtitle: "Random creation",
-                                gradient: [Color(red: 1.0, green: 0.4, blue: 0.6), Color(red: 0.6, green: 0.2, blue: 1.0)]
+                                gradient: AppGradients.pink
                             )
                             
                             QuickActionCard(
-                                icon: "doc.text",
+                                QuickActionIconImageName: "remixWhite",
                                 title: "Remix",
                                 subtitle: "Edit previous",
-                                gradient: [Color(red: 1.0, green: 0.5, blue: 0.0), Color.yellow]
+                                gradient: AppGradients.orangeYellow
                             )
                             
                             QuickActionCard(
-                                icon: "list.bullet",
+                                QuickActionIconImageName: "templatesWhite",
                                 title: "Templates",
                                 subtitle: "Browse presets",
-                                gradient: [Color.green, Color(red: 0.2, green: 0.8, blue: 0.8)]
+                                gradient: AppGradients.green
                             )
                         }
                     }
