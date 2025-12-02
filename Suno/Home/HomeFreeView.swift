@@ -43,6 +43,7 @@ struct HomeFreeView: View {
                 trendingTemplatesSection
                 creativeJourneySection
                 proTipsSection
+                unlockFullPotentialSection
             }
             .background(Color.white)
         }
@@ -718,6 +719,59 @@ struct HomeFreeView: View {
                 )
             }
         }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 32)
+    }
+    
+    private var unlockFullPotentialSection: some View {
+        VStack(spacing: 20) {
+            // Иконка корона
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white)
+                .frame(width: 64, height: 64)
+                .overlay(
+                    Image("crownColored")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                )
+            
+            // Заголовок
+            Text("Unlock Full Potential")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.white)
+            
+            // Описание
+            Text("Get unlimited generations, HQ audio, and instant creation")
+                .font(.system(size: 12))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+            
+            // Кнопка
+            Button(action: {}) {
+                Text("Try Pro Free for 3 Days")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(Color(red: 0.859, green: 0.153, blue: 0.467)) // #DB2777
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+            }
+            
+            // Текст под кнопкой
+            Text("Then $9.99/month. Cancel anytime.")
+                .font(.system(size: 12))
+                .foregroundColor(.white.opacity(0.9))
+        }
+        .padding(32)
+        .background(AppGradients.orangePinkPurple)
+        .cornerRadius(24)
+        .overlay(
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(Color(red: 0.898, green: 0.906, blue: 0.922), lineWidth: 1) // #E5E7EB
+        )
+        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
         .padding(.horizontal, 20)
         .padding(.bottom, 32)
     }
