@@ -42,6 +42,7 @@ struct HomeView: View {
                 recentCreationsSection
                 proExclusiveFeaturesSection
                 trendingTemplatesSection
+                creativeJourneySection
                 proTipsSection
             }
             .background(Color.white)
@@ -564,6 +565,100 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 32)
+    }
+    
+    private var creativeJourneySection: some View {
+        VStack(alignment: .center, spacing: 16) {
+            Text("Your Creative Journey")
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+            
+            HStack(spacing: 12) {
+                // Первая ячейка - Songs Created
+                VStack(spacing: 8) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(AppGradients.blue)
+                            .frame(width: 64, height: 64)
+                            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+                        
+                        Image("noteWhite")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(.white)
+                    }
+                    
+                    Text("12")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Text("Songs Created")
+                        .font(.system(size: 12))
+                        .foregroundColor(.gray)
+                }
+                .frame(maxWidth: .infinity)
+                
+                // Вторая ячейка - Total Duration
+                VStack(spacing: 8) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(AppGradients.redOrange)
+                            .frame(width: 64, height: 64)
+                            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+                        
+                        Image(systemName: "clock.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                    }
+                    
+                    Text("24m")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Text("Total Duration")
+                        .font(.system(size: 12))
+                        .foregroundColor(.gray)
+                }
+                .frame(maxWidth: .infinity)
+                
+                // Третья ячейка - Day Streak
+                VStack(spacing: 8) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(AppGradients.pink)
+                            .frame(width: 64, height: 64)
+                            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+                        
+                        Image("fireWhite")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.white)
+                    }
+                    
+                    Text("5")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Text("Day Streak")
+                        .font(.system(size: 12))
+                        .foregroundColor(.gray)
+                }
+                .frame(maxWidth: .infinity)
+            }
+        }
+        .padding(20)
+        .background(Color(red: 0.976, green: 0.980, blue: 0.984)) // #F9FAFB
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color(red: 0.953, green: 0.957, blue: 0.965), lineWidth: 1) // #F3F4F6
+        )
+        .padding(.horizontal, 20)
+        .padding(.bottom, 32)
     }
                     
     private var proTipsSection: some View {
