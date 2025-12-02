@@ -130,6 +130,16 @@ struct AppGradients {
         startPoint: .bottom,
         endPoint: .top
     )
+
+    // 13. Градиент для Daily Credits (#FFF7ED → #FDF2F8)
+    static let dailyCreditsBackground: LinearGradient = LinearGradient(
+        colors: [
+            Color(red: 1.0,   green: 0.969, blue: 0.929), // #FFF7ED
+            Color(red: 0.992, green: 0.949, blue: 0.972)  // #FDF2F8
+        ],
+        startPoint: .leading,
+        endPoint: .trailing
+    )
 }
 
 
