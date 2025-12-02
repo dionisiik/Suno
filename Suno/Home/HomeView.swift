@@ -118,6 +118,7 @@ struct HomeView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(AppGradients.orangePinkPurple)
                                 .frame(width: 100, height: 100)
+                                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                             
                             VStack(spacing: 4) {
                                 Image("magicStickWithStarsWhiteBig")
@@ -178,14 +179,21 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 12) {
-                                GenreTag(icon: "bolt.fill", text: "Energetic Pop", color: Color(red: 1.0, green: 0.5, blue: 0.0))
-                                GenreTag(icon: "moon.fill", text: "Chill Lofi", color: Color(red: 0.2, green: 0.6, blue: 1.0))
-                                GenreTag(icon: "guitars", text: "Acoustic", color: Color(red: 0.6, green: 0.4, blue: 0.2))
-                                GenreTag(icon: "sword.fill", text: "Epic", color: .red)
+                                GenreTag(icon: "lightningYellow", text: "Energetic Pop", color: Color(red: 1.0, green: 0.5, blue: 0.0))
+                                GenreTag(icon: "moonSYSBlue", text: "Chill Lofi", color: Color(red: 0.2, green: 0.6, blue: 1.0))
+                                GenreTag(icon: "guitarColor", text: "Acoustic", color: Color(red: 0.6, green: 0.4, blue: 0.2))
+                                GenreTag(icon: "drumColor", text: "Epic", color: .red)
                             }
                             .padding(.horizontal, 4)
                         }
                     }
+                    .padding(20)
+                    .background(Color(red: 0.976, green: 0.980, blue: 0.984)) // #F9FAFB
+                    .cornerRadius(16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color(red: 0.898, green: 0.906, blue: 0.922), lineWidth: 1) // #E5E7EB
+                    )
                     .padding(.horizontal, 20)
                     .padding(.bottom, 24)
     }
@@ -213,6 +221,13 @@ struct HomeView: View {
                 instrumentsSelection
             }
         }
+        .padding(20)
+        .background(Color(red: 0.976, green: 0.980, blue: 0.984)) // #F9FAFB
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color(red: 0.898, green: 0.906, blue: 0.922), lineWidth: 1) // #E5E7EB
+        )
         .padding(.horizontal, 20)
         .padding(.bottom, 24)
     }
@@ -358,6 +373,7 @@ struct HomeView: View {
                             .padding()
                             .background(AppGradients.orangePinkPurple)
                             .cornerRadius(12)
+                            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                         }
             .disabled(viewModel.prompt.isEmpty)
             .opacity(viewModel.prompt.isEmpty ? 0.6 : 1.6)
@@ -459,6 +475,7 @@ struct HomeView: View {
                                     .fill(AppGradients.redOrange)
                                     .frame(width: 40, height: 40)
                                     .cornerRadius(12)
+                                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                                 Image("proCrownWhite")
                                     .foregroundColor(Color(red: 1.0, green: 0.5, blue: 0.0))
                                     .font(.system(size: 24))

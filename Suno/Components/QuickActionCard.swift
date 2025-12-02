@@ -13,6 +13,7 @@ struct QuickActionCard: View {
                     RoundedRectangle(cornerRadius: 16)
                         .fill(gradient)
                         .frame(width: 48, height: 48)
+                        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     
                     Image(QuickActionIconImageName)
                         .font(.system(size: 15))

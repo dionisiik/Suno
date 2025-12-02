@@ -8,6 +8,7 @@ struct ProMemberSection: View {
                     RoundedRectangle(cornerRadius: 16)
                         .fill(AppGradients.redOrange)
                         .frame(width: 48, height: 48)
+                        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     
                     Image("circleQuestionWhite")
                         .resizable()

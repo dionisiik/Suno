@@ -13,6 +13,7 @@ struct HomeProFeatureRow: View {
                     .fill(color)
                     .frame(width: 40, height: 40)
                     .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                 Image(HomeProImageName)
                     .foregroundColor(.white)
                     .font(.system(size: 20))

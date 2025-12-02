@@ -31,8 +31,10 @@ struct CreationRow: View {
                         )
                         .frame(width: 60, height: 60)
                     
-                    Image(systemName: track.icon)
-                        .font(.system(size: 24))
+                    Image(track.icon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
                         .foregroundColor(.white)
                 }
                 ZStack {
@@ -40,9 +42,9 @@ struct CreationRow: View {
                         .fill(AppGradients.redOrange)
                         .frame(width: 20, height: 20)
                     Image("starWhite")
-                        .font(.system(size: 12))
-                        .foregroundColor(.yellow)
-                        .frame(width: 13, height: 12, alignment: .center)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 13, height: 12)
                 }
                 .offset(x: 4, y: -4)
             }
