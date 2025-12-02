@@ -14,11 +14,20 @@ struct ProTag: View {
             Text(text)
                 .font(.system(size: 12, weight: .medium))
                 .foregroundColor(.black)
+            
+            Spacer()
         }
         .padding(.horizontal, 12)
-        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .background(Color.white)
         .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(
+                    Color(red: 0.898, green: 0.906, blue: 0.922), // #E5E7EB
+                    lineWidth: 1
+                )
+        )
     }
 }
 

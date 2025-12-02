@@ -16,7 +16,7 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 headerSection
                 createMusicSection
-                proMemberSection
+                ProMemberSection()
                 promptSection
                 advancedOptionsSection
                 generateButtonSection
@@ -124,50 +124,6 @@ struct HomeView: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 20)
                     }
-                    .padding(.bottom, 32)
-    }
-                    
-    private var proMemberSection: some View {
-                    VStack(alignment: .leading, spacing: 16) {
-                        HStack(spacing: 12) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color(red: 1.0, green: 0.5, blue: 0.0))
-                                    .frame(width: 40, height: 40)
-                                
-                                Text("S")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(.white)
-                            }
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("You're a Pro Member!")
-                                    .font(.system(size: 18, weight: .bold))
-                                    .foregroundColor(.black)
-                                
-                                Text("Enjoying all premium features")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                        
-                        HStack(spacing: 12) {
-                            ProTag(icon: "bolt.fill", text: "Instant", color: Color(red: 1.0, green: 0.5, blue: 0.0))
-                            ProTag(icon: "infinity", text: "Unlimited", color: Color(red: 0.6, green: 0.2, blue: 1.0))
-                            ProTag(icon: "headphones", text: "HQ Audio", color: Color(red: 1.0, green: 0.4, blue: 0.6))
-                            ProTag(icon: "checkmark.circle.fill", text: "No Marks", color: .green)
-                        }
-                    }
-                    .padding(20)
-                    .background(
-                        LinearGradient(
-                            colors: [Color(red: 1.0, green: 0.9, blue: 0.8), Color(red: 1.0, green: 0.85, blue: 0.9)],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .cornerRadius(20)
-                    .padding(.horizontal, 20)
                     .padding(.bottom, 32)
     }
                     
@@ -384,17 +340,11 @@ struct HomeView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(
-                                LinearGradient(
-                                    colors: [Color(red: 1.0, green: 0.5, blue: 0.0), Color(red: 0.6, green: 0.2, blue: 1.0)],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
+                            .background(AppGradients.orangePinkPurple)
                             .cornerRadius(12)
                         }
             .disabled(viewModel.prompt.isEmpty)
-            .opacity(viewModel.prompt.isEmpty ? 0.6 : 1.0)
+            .opacity(viewModel.prompt.isEmpty ? 0.6 : 1.6)
                         
                         Text("Priority processing • No queue • No watermarks")
                             .font(.system(size: 12))

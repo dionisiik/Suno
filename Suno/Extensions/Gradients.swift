@@ -108,6 +108,28 @@ struct AppGradients {
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
+
+    // 11. Оранжево‑розово‑фиолетовый градиент (#FB923C → #EC4899 → #9333EA)
+    static let orangePinkPurple: LinearGradient = LinearGradient(
+        colors: [
+            Color(red: 0.984, green: 0.573, blue: 0.235), // #FB923C
+            Color(red: 0.925, green: 0.282, blue: 0.600), // #EC4899
+            Color(red: 0.576, green: 0.200, blue: 0.918)  // #9333EA
+        ],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    // 12. Нежный фон Pro Member (#FEFCE8 → #FFF7ED → #FDF2F8)
+    static let proMemberBackground: LinearGradient = LinearGradient(
+        colors: [
+            Color(red: 0.996, green: 0.988, blue: 0.910), // #FEFCE8
+            Color(red: 1.0,   green: 0.969, blue: 0.929), // #FFF7ED
+            Color(red: 0.992, green: 0.949, blue: 0.972)  // #FDF2F8
+        ],
+        startPoint: .bottom,
+        endPoint: .top
+    )
 }
 
 
