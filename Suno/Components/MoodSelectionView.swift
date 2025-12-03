@@ -53,4 +53,13 @@ struct MoodSelectionView: View {
     }
 }
 
+#Preview {
+    @State var mood: String? = "Calm"
+    
+    return MoodSelectionView(selectedMood: $mood)
+        .padding()
+        .background(Color.gray.opacity(0.1))
+}
+
+
 

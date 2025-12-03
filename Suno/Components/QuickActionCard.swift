@@ -1,27 +1,22 @@
 import SwiftUI
 
 struct QuickActionCard: View {
-    let icon: String
+    let QuickActionIconImageName: String
     let title: String
     let subtitle: String
-    let gradient: [Color]
+    let gradient: LinearGradient
     
     var body: some View {
         Button(action: {}) {
             VStack(spacing: 12) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
-                        .fill(
-                            LinearGradient(
-                                colors: gradient,
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(height: 80)
+                        .fill(gradient)
+                        .frame(width: 48, height: 48)
+                        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                     
-                    Image(systemName: icon)
-                        .font(.system(size: 32))
+                    Image(QuickActionIconImageName)
+                        .font(.system(size: 15))
                         .foregroundColor(.white)
                 }
                 
@@ -37,14 +32,26 @@ struct QuickActionCard: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(Color.white)
+            .background(gradient.opacity(0.1))
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(white: 0.8), lineWidth: 1)
+                    .stroke(gradient, lineWidth: 1)
             )
         }
     }
 }
+
+#Preview {
+    QuickActionCard(
+        QuickActionIconImageName: "microphoneWhite",
+        title: "Voice Input",
+        subtitle: "Speak your idea",
+        gradient: AppGradients.blue
+    )
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
 
 

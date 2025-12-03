@@ -34,7 +34,7 @@ class AppState: ObservableObject {
                 genre: "Lofi",
                 mood: "Calm",
                 quality: .hq,
-                icon: "headphones",
+                icon: "headphonesWhite",
                 gradientColors: ["0.6,0.2,1.0", "1.0,0.4,0.6"]
             ),
             Track(
@@ -45,7 +45,7 @@ class AppState: ObservableObject {
                 genre: "Acoustic",
                 mood: "Happy",
                 quality: .hq,
-                icon: "guitars",
+                icon: "guitarWhite",
                 gradientColors: ["0.2,0.8,0.6", "0.2,0.8,0.8"]
             ),
             Track(
@@ -56,7 +56,7 @@ class AppState: ObservableObject {
                 genre: "Epic",
                 mood: "Epic",
                 quality: .hq,
-                icon: "drum.fill",
+                icon: "drumWhite",
                 gradientColors: ["1.0,0.0,0.0", "1.0,0.4,0.6"]
             ),
             Track(
@@ -67,7 +67,7 @@ class AppState: ObservableObject {
                 genre: "Jazz",
                 mood: "Chill",
                 quality: .hq,
-                icon: "music.note",
+                icon: "noteWhite",
                 gradientColors: ["0.2,0.6,1.0", "0.6,0.2,1.0"]
             )
         ]

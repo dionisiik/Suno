@@ -1,47 +1,51 @@
 import SwiftUI
 
 struct TemplateCard: View {
-    let icon: String
+    let TemplateIconImageName: String
     let title: String
     let subtitle: String
     let color: Color
     
     var body: some View {
         Button(action: {}) {
-            VStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 12) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(color.opacity(0.2))
-                        .frame(height: 80)
-                    
-                    Image(systemName: icon)
-                        .font(.system(size: 32))
-                        .foregroundColor(color)
+                    Rectangle()
+                        .fill(color)
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(12)
+                    Image(TemplateIconImageName)
+                        .foregroundColor(.white)
+                        .font(.system(size: 12))
                 }
                 
-                VStack(spacing: 4) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(title)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.black)
+                        .multilineTextAlignment(.leading)
                     
                     Text(subtitle)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 
                 Button(action: {}) {
                     Text("Try Template")
                         .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.white)
+                        .foregroundColor(color)
                         .padding(.horizontal, 16)
+                        .frame(width: 123, height: 22)
                         .padding(.vertical, 6)
-                        .background(color)
+                        .background(.white)
                         .cornerRadius(8)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.white)
+            .frame(minWidth: 24, maxWidth: .infinity, minHeight: 154, alignment: .leading)
+            .padding(16)
+            .background(color.opacity(0.1))
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
@@ -50,5 +54,17 @@ struct TemplateCard: View {
         }
     }
 }
+
+#Preview {
+    TemplateCard(
+        TemplateIconImageName: "cloudWhite",
+        title: "Dream Pop",
+        subtitle: "Ethereal & atmospheric",
+        color: .blue
+    )
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
 
 

@@ -8,8 +8,10 @@ struct GenreTag: View {
     var body: some View {
         Button(action: {}) {
             HStack(spacing: 6) {
-                Image(systemName: icon)
-                    .font(.system(size: 12))
+                Image(icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 16, height: 16)
                 Text(text)
                     .font(.system(size: 13))
             }
@@ -25,5 +27,15 @@ struct GenreTag: View {
         }
     }
 }
+
+#Preview {
+    HStack {
+        GenreTag(icon: "bolt.fill", text: "Energetic Pop", color: .orange)
+        GenreTag(icon: "moon.fill", text: "Chill Lofi", color: .blue)
+    }
+    .padding()
+    .background(Color.gray.opacity(0.1))
+}
+
 
 
