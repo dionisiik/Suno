@@ -8,10 +8,17 @@ struct GenreTag: View {
     var body: some View {
         Button(action: {}) {
             HStack(spacing: 6) {
-                Image(icon)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 16, height: 16)
+                // Проверяем, является ли иконка системной (содержит точку)
+                if icon.contains(".") {
+                    Image(systemName: icon)
+                        .font(.system(size: 14))
+                        .frame(width: 16, height: 16)
+                } else {
+                    Image(icon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 16, height: 16)
+                }
                 Text(text)
                     .font(.system(size: 13))
             }

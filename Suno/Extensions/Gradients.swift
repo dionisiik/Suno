@@ -140,6 +140,26 @@ struct AppGradients {
         startPoint: .leading,
         endPoint: .trailing
     )
+    
+    // 14. Градиент для In Progress (#60A5FA → #2563EB)
+    static let inProgressGradient: LinearGradient = LinearGradient(
+        colors: [
+            Color(red: 0.376, green: 0.647, blue: 0.980), // #60A5FA
+            Color(red: 0.145, green: 0.388, blue: 0.922)  // #2563EB
+        ],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+    
+    // 15. Градиент для Your Prompt (#FAF5FF → #FDF2F8)
+    static let promptBackground: LinearGradient = LinearGradient(
+        colors: [
+            Color(red: 0.980, green: 0.961, blue: 1.0),   // #FAF5FF
+            Color(red: 0.992, green: 0.949, blue: 0.973)  // #FDF2F8
+        ],
+        startPoint: .leading,
+        endPoint: .trailing
+    )
 }
 
 
