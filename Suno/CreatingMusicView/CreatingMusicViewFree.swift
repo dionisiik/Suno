@@ -1,20 +1,14 @@
 //
-//  CreatingMusicView.swift
+//  CreatingMusicViewFree.swift
 //  Suno
 //
-//  Created by Дионисий Коневиченко on 03.12.2025.
+//  Created by Дионисий Коневиченко on 04.12.2025.
 //
 
 import SwiftUI
 import AVKit
 
-enum GenerationStep: Int {
-    case analyzing = 1
-    case composing = 2
-    case finalizing = 3
-}
-
-struct CreatingMusicView: View {
+struct CreatingMusicViewFree: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var appState: AppState
     @State private var player: AVPlayer?
@@ -70,7 +64,10 @@ struct CreatingMusicView: View {
                     generationProgressSection
                     generationStepsSection
                     audioQualitySection
+                    watermarkNoticeSection
                     whileYouWaitSection
+                    proVsFreeSection
+                    skipTheWaitSection
                 }
                 .padding(.bottom, 32)
             }
@@ -111,24 +108,22 @@ struct CreatingMusicView: View {
             
             Spacer()
             
-            // PRO button как в HomeView
-            if appState.user.isPro {
-                Button(action: {}) {
-                    HStack(spacing: 6) {
-                        Image("proCrownWhite")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 12, height: 12)
-                        Text("PRO")
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundStyle(.white)
-                    }
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(AppGradients.redOrange)
-                    .cornerRadius(20)
+            // Upgrade button как в HomeFreeView
+            Button(action: {}) {
+                HStack(spacing: 6) {
+                    Image("proCrownWhite")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 12, height: 12)
+                    Text("Upgrade")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundStyle(.white)
                 }
+                .foregroundColor(.black)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(AppGradients.redOrange)
+                .cornerRadius(20)
             }
         }
         .padding(.horizontal, 20)
@@ -346,6 +341,27 @@ struct CreatingMusicView: View {
                 }
             }
             .frame(height: 4)
+            
+            // Кнопка Skip the wait
+            VStack(spacing: 12) {
+                // Текст
+                Text("Skip the wait with Pro")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                // Кнопка Upgrade Now
+                Button(action: {}) {
+                    Text("Upgrade Now")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(AppGradients.redOrange)
+                        .cornerRadius(12)
+                }
+            }
+            .padding(.top, 4)
         }
         .padding(16)
         .background(AppGradients.dailyCreditsBackground)
@@ -506,13 +522,11 @@ struct CreatingMusicView: View {
                 // Иконка
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(AppGradients.redOrange)
+                        .fill(Color(red: 0.820, green: 0.835, blue: 0.859)) // #D1D5DB
                         .frame(width: 32, height: 32)
                     
-                    Image("qualityWhite")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 18, height: 18)
+                    Image(systemName: "chart.bar.fill")
+                        .font(.system(size: 14))
                         .foregroundColor(.white)
                 }
                 
@@ -522,14 +536,53 @@ struct CreatingMusicView: View {
                 
                 Spacer()
                 
-                // Pro tag
-                Text("PRO")
-                    .font(.system(size: 12, weight: .bold))
+                // Standard tag
+                Text("Standard")
+                    .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.white)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
-                    .background(AppGradients.redOrange)
+                    .background(Color(red: 0.294, green: 0.333, blue: 0.388)) // #4B5563
                     .cornerRadius(12)
+            }
+            
+            // Description
+            Text("Your track will be generated in standard quality (128 kbps)")
+                .font(.system(size: 12))
+                .foregroundColor(.gray)
+            
+            // Upgrade section
+            Button(action: {}) {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text("Upgrade for HQ Audio")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                    }
+                    
+                    HStack(spacing: 6) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 14))
+                            .foregroundColor(.green)
+                        
+                        Text("320 kbps quality")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding(12)
+                .background(Color.white)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color(red: 0.898, green: 0.906, blue: 0.922), lineWidth: 1) // #E5E7EB
+                )
             }
             
             // Grid с ячейками качества
@@ -543,7 +596,7 @@ struct CreatingMusicView: View {
                 audioQualityCard(
                     icon: "qualityWhite",
                     label: "Quality",
-                    value: "320 kbps",
+                    value: "128 kbps",
                     gradient: AppGradients.pink,
                     borderColor: Color(red: 0.753, green: 0.518, blue: 0.988) // #C084FC - первый цвет pink градиента
                 )
@@ -567,18 +620,18 @@ struct CreatingMusicView: View {
                 audioQualityCard(
                     icon: "watermarkWhite",
                     label: "Watermark",
-                    value: "None",
+                    value: "Yes",
                     gradient: AppGradients.green,
                     borderColor: Color(red: 0.290, green: 0.871, blue: 0.502) // #4ADE80 - первый цвет green градиента
                 )
             }
         }
         .padding(16)
-        .background(AppGradients.dailyCreditsBackground)
+        .background(Color(red: 0.976, green: 0.980, blue: 0.984)) // #F9FAFB
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(red: 0.996, green: 0.843, blue: 0.667), lineWidth: 1) // #FED7AA
+                .stroke(Color(red: 0.898, green: 0.906, blue: 0.922), lineWidth: 1) // #E5E7EB
         )
         .padding(.horizontal, 20)
     }
@@ -686,6 +739,233 @@ struct CreatingMusicView: View {
                 .fill(leftGradient.opacity(0.08))
         )
         .cornerRadius(16)
+    }
+    
+    private var watermarkNoticeSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // Header с иконкой
+            HStack(spacing: 12) {
+                // Иконка информации
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color(red: 0.980, green: 0.800, blue: 0.082)) // Желтый #FACC15
+                        .frame(width: 32, height: 32)
+                    
+                    Text("i")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.white)
+                }
+                
+                Text("Watermark Notice")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.black)
+            }
+            
+            // Основной текст
+            Text("Your generated artwork will include a small watermark. Remove it by upgrading to Pro.")
+                .font(.system(size: 12))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.leading)
+            
+            // Подсказка с иконкой вопроса
+            HStack(spacing: 6) {
+                Image(systemName: "questionmark.circle")
+                    .font(.system(size: 14))
+                    .foregroundColor(Color(red: 0.631, green: 0.380, blue: 0.027)) // #A16207
+                
+                Text("Pro members get clean exports")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(Color(red: 0.631, green: 0.380, blue: 0.027)) // #A16207
+            }
+        }
+        .padding(16)
+        .background(Color(red: 0.996, green: 0.988, blue: 0.910)) // #FEFCE8
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color(red: 0.996, green: 0.941, blue: 0.541), lineWidth: 1) // #FEF08A
+        )
+        .padding(.horizontal, 20)
+    }
+    
+    private var proVsFreeSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            // Header с иконкой короны
+            VStack(spacing: 12) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(AppGradients.pink)
+                        .frame(width: 48, height: 48)
+                    
+                    Image("proCrownWhite")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.white)
+                }
+                
+                Text("Pro vs Free")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.black)
+                
+                Text("See what you're missing")
+                    .font(.system(size: 14))
+                    .foregroundColor(.gray)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 8)
+            
+            // Секции сравнения
+            VStack(spacing: 12) {
+                proVsFreeRow(
+                    icon: "lightningYellow",
+                    title: "Generation Speed",
+                    freeValue: "45s wait",
+                    proValue: "Instant",
+                    iconGradient: AppGradients.redOrange
+                )
+                
+                proVsFreeRow(
+                    icon: "headphonesPink",
+                    title: "Audio Quality",
+                    freeValue: "Standard",
+                    proValue: "HQ Studio",
+                    iconGradient: AppGradients.blue
+                )
+                
+                proVsFreeRow(
+                    icon: "questionmark.circle.fill",
+                    title: "Watermarks",
+                    freeValue: "Visible",
+                    proValue: "Removed",
+                    iconGradient: AppGradients.pink
+                )
+                
+                proVsFreeRow(
+                    icon: "infinity",
+                    title: "Daily Limit",
+                    freeValue: "5 songs",
+                    proValue: "Unlimited",
+                    iconGradient: AppGradients.green
+                )
+            }
+        }
+        .padding(20)
+        .background(AppGradients.proBackground)
+        .cornerRadius(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color(red: 0.847, green: 0.706, blue: 0.996), lineWidth: 1)
+        )
+        .padding(.horizontal, 20)
+    }
+    
+    private func proVsFreeRow(
+        icon: String,
+        title: String,
+        freeValue: String,
+        proValue: String,
+        iconGradient: LinearGradient
+    ) -> some View {
+        HStack(spacing: 12) {
+            // Иконка
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(iconGradient)
+                    .frame(width: 32, height: 32)
+                
+                if icon.contains(".") {
+                    Image(systemName: icon)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                } else if icon == "infinity" {
+                    Image(systemName: "infinity")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                } else {
+                    Image(icon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
+                        .foregroundColor(.white)
+                }
+            }
+            
+            // Название
+            Text(title)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.black)
+            
+            Spacer()
+            
+            // Значения
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(freeValue)
+                    .font(.system(size: 12))
+                    .foregroundColor(.gray)
+                    .strikethrough()
+                
+                Text(proValue)
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(Color(red: 0.925, green: 0.282, blue: 0.600)) // #EC4899 pink
+            }
+        }
+        .frame(height: 58)
+        .padding(12)
+        .background(Color.white)
+        .cornerRadius(12)
+    }
+    
+    private var skipTheWaitSection: some View {
+        VStack(spacing: 20) {
+            // Иконка ракета
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white)
+                .frame(width: 64, height: 64)
+                .overlay(
+                    Image("rocketPurple")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                )
+            
+            // Заголовок
+            Text("Skip the Wait Forever")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.white)
+            
+            // Описание
+            Text("Get instant generation + HQ audio + unlimited creations")
+                .font(.system(size: 12))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+            
+            // Кнопка
+            Button(action: {}) {
+                Text("Try Pro Free for 3 Days")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(Color(red: 0.859, green: 0.153, blue: 0.467)) // #DB2777
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+            }
+            
+            // Текст под кнопкой
+            Text("Then $9.99/month. Cancel anytime.")
+                .font(.system(size: 12))
+                .foregroundColor(.white.opacity(0.9))
+        }
+        .padding(32)
+        .background(AppGradients.orangePinkPurple)
+        .cornerRadius(24)
+        .overlay(
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(Color(red: 0.898, green: 0.906, blue: 0.922), lineWidth: 1) // #E5E7EB
+        )
+        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+        .padding(.horizontal, 20)
     }
     
     private var whileYouWaitSection: some View {
@@ -912,61 +1192,7 @@ struct CreatingMusicView: View {
     }
 }
 
-struct WhileYouWaitCard: View {
-    let icon: String
-    let title: String
-    let description: String
-    let gradient: LinearGradient
-    
-    var body: some View {
-        HStack(alignment: .top, spacing: 12) {
-            // Иконка слева
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(gradient)
-                    .frame(width: 48, height: 48)
-                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
-                
-                if icon.contains(".") {
-                    Image(systemName: icon)
-                        .font(.system(size: 20))
-                        .foregroundColor(.white)
-                } else {
-                    Image(icon)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
-                }
-            }
-            
-            // Текст справа
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.leading)
-                
-                Text(description)
-                    .font(.system(size: 12))
-                    .foregroundColor(.gray)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            
-            Spacer()
-        }
-        .padding(16)
-        .background(gradient.opacity(0.1))
-        .cornerRadius(16)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(gradient, lineWidth: 1)
-        )
-    }
-}
-
 #Preview {
-    CreatingMusicView()
+    CreatingMusicViewFree()
         .environmentObject(AppState())
 }
